@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  requestOffer: one
+  member: one
+  completed: false
+
+two:
+  requestOffer: two
+  member: two
+  completed: false
