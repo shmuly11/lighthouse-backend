@@ -3,11 +3,11 @@ class RequestOffer < ApplicationRecord
   belongs_to :member
   belongs_to :broadcast
 
-  has_many :assigneds
-    # has_many :assigned_helpeds, class_name: "Assigned", :foreign_key => "member1_id"
-    # has_many :helpeds, through: :assigned_helpeds, source: :member
-    # has_many :assigned_helpers, class_name: "Assigned", :foreign_key => "member_id"
-    # has_many :helpers, through: :assigned_helpers, source: :member1
+  # has_many :assigneds, dependent: :destroy
+    has_many :assigned_requests, class_name: "Assigned", :foreign_key => "offer_id", dependent: :destroy
+    has_many :requests, through: :assigned_requests, source: :request
+    has_many :assigned_offers, class_name: "Assigned", :foreign_key => "request_id", dependent: :destroy
+    has_many :offers, through: :assigned_offers, source: :offer
 
     scope :requests, -> { where(offer: false) }
     scope :offers, -> { where(offer: true) }
