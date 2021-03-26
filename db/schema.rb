@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_19_172740) do
+ActiveRecord::Schema.define(version: 2021_03_23_190146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,13 @@ ActiveRecord::Schema.define(version: 2021_03_19_172740) do
     t.bigint "community_id", null: false
     t.string "name"
     t.string "color"
-    t.string "features"
+    t.string "start_date"
+    t.string "end_date"
+    t.string "time"
+    t.string "url"
+    t.string "location"
+    t.string "list"
+    t.integer "people"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["community_id"], name: "index_broadcasts_on_community_id"
@@ -41,6 +47,7 @@ ActiveRecord::Schema.define(version: 2021_03_19_172740) do
 
   create_table "communities", force: :cascade do |t|
     t.string "name"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -77,6 +84,9 @@ ActiveRecord::Schema.define(version: 2021_03_19_172740) do
     t.string "time"
     t.string "url"
     t.string "location"
+    t.string "list"
+    t.integer "people"
+    t.string "title"
     t.index ["broadcast_id"], name: "index_request_offers_on_broadcast_id"
     t.index ["member_id"], name: "index_request_offers_on_member_id"
   end

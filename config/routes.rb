@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   get '/requests', to: 'request_offers#requests'
   get '/offers', to: 'request_offers#offers'
   post 'request_offers/new_offer', to: 'request_offers#new_offer'
+  post '/admin', to: 'community_members#admin'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
