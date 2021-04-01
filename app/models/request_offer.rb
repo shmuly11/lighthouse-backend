@@ -18,5 +18,9 @@ class RequestOffer < ApplicationRecord
     def member_name
       self.member.name
     end
+
+    def member_image
+      self.member.image
+    end
   
 end

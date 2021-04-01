@@ -36,17 +36,19 @@ class RequestOffersController < ApplicationController
     end
 
     def destroy
+        
         req = RequestOffer.find(params[:id])
+        req.offers.map{|offer| offer.destroy}
         req.destroy
     end
 
     private
 
     def req_params
-        params.permit(:member_id, :content, :start_date, :end_date, :time, :url, :location, :title, :list, :offer, :broadcast_id, :assigned, new_assigned:[:member_id, :member1_id, :request_id])
+        params.permit(:member_id, :content, :start_date, :end_date, :time, :people, :url, :location, :title, :list, :offer, :broadcast_id, :assigned, new_assigned:[:member_id, :member1_id, :request_id])
     end
 
     def offer_params
-        params.permit(new_offer: [:member_id, :content, :start_date, :end_date, :time, :url, :location, :tite, :list, :offer, :broadcast_id, :assigned], new_assigned:[:member_id, :member1_id, :request_id])
+        params.permit(new_offer: [:member_id, :content, :start_date, :end_date, :time, :people, :url, :location, :tite, :list, :offer, :broadcast_id, :assigned], new_assigned:[:member_id, :member1_id, :request_id])
     end
 end

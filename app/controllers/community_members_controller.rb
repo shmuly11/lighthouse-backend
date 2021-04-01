@@ -1,7 +1,12 @@
 class CommunityMembersController < ApplicationController
   def create
-    com_member = CommunityMember.create(com_member_params)
-    render json: com_member.community
+    community = Community.find(com_member_params[:community_id])
+    if community.authenticate(com_member_params[:password])
+      com_member = CommunityMember.create(member_id: com_member_params[:member_id], community_id: com_member_params[:community_id])
+      render json: com_member.member
+    else
+      render json: { errors: ["Invalid password"] }, status: :unauthorized
+    end
   end
 
   def admin
@@ -12,7 +17,7 @@ class CommunityMembersController < ApplicationController
   private
 
   def com_member_params
-    params.permit(:member_id, :community_id)
+    params.permit(:member_id, :community_id, :password)
   end
 
 end

@@ -26,8 +26,14 @@ class MembersController < ApplicationController
     # end
 
     def signup
+        
         member = Member.create(member_params)
+        if member_params[:image] != ""
+            image_url = Cloudinary::Uploader.upload(member_params[:image])
+            member.update(image: image_url['url'])
+        end
         if member.valid?
+
         render json: member, status: :created
         else
             render json: {errors: member.errors.full_messages}, status: :unprocessable_entity
@@ -37,7 +43,7 @@ class MembersController < ApplicationController
     private
 
     def member_params
-        params.permit(:name, :password, :email, :age)
+        params.permit(:name, :password, :email, :age, :image)
     end
 
     
